@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe</title>
+
+    <link rel="icon" href="./assets/favicon.ico">
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap" rel="stylesheet">
+   
+    <script src="index.js" defer></script>
+</head>
+<body>
+    <header class="header">
+        <button class="score-show-btn btn"><img class="score-modal-img" src="./assets/results-btn.svg" alt="results button"></button>
+        <h1 class="title">Tic-Tac-Toe</h1>
+        <button class="mute-sound-btn btn"><img class="mute-sound-img volume-on" src="./assets/sound-on.svg"></button>
+    </header>
+
+    <main>
+        <div class="game-board cross">
+            <div class="cell" data-cell></div>
+            <div class="cell" data-cell></div>
+            <div class="cell" data-cell></div>
+            <div class="cell" data-cell></div>
+            <div class="cell" data-cell></div>
+            <div class="cell" data-cell></div>
+            <div class="cell" data-cell></div>
+            <div class="cell" data-cell></div>
+            <div class="cell" data-cell></div>
+        </div>
+        <audio class="cross-audio" src="./assets/cross-click.wav"></audio>
+        <audio class="nought-audio" src="./assets/nought-click.wav"></audio>
+        <!-- Result Message -->
+    
+        <div class="result-message">
+            <p class="message"></p>
+            <button class="btn restart-btn">Restart</button>
+            <p class="moves">Number of moves: <span class="moves-number">0</span></p>
+        </div>
+        <audio class="win-audio" src="./assets/win.wav"></audio>
+        <audio class="draw-audio" src="./assets/draw.wav"></audio>
+
+        <div class="score-window">
+            <tbody>
+                <table class="score">
+                    <tr>
+                        <th class="cross-column-title">cross</th>
+                        <th class="nought-column-title">nought</th>
+                    </tr>
+                </table>
+            </tbody>
+            <button class="close-modal-btn btn"></button>
+        </div>
+    </main>
+</body>
+</html>

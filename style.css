@@ -1,0 +1,252 @@
+*, 
+*::before, 
+*::after {
+    box-sizing: border-box;
+}
+
+:root {
+    --main-bg-color: #FFF;
+    --board-color: #F2E18D;
+    --cross-color: #89D9D1;
+    --nought-color: #F27289;
+    --mark-hover-color: #f8f6f0;
+
+    --cell-size: 120px;
+    --score-cell-size: 120px;
+}
+
+body {
+    margin: 0;
+
+    background-color: var(--main-bg-color);
+
+    font-family: 'Gloria Hallelujah', cursive;
+    font-size: 20px;
+}
+
+.header {
+    max-width: 768px;
+    height: 10vh;
+    margin: 0 auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.score-modal-img,
+.mute-sound-img {
+    width: 40px;
+    filter: invert(90%) sepia(21%) saturate(626%) hue-rotate(112deg) brightness(90%) contrast(87%);
+
+    cursor: pointer;
+}
+
+.title {
+    font-size: 60px;
+    line-height: 70px;
+    letter-spacing: 5px;
+    color: #F2E18D;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+}
+
+.btn {
+    border: none;
+    background-color: transparent;
+}
+
+/* Game Board */
+
+.game-board {
+    width: 100%;
+    height: 90vh;
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    justify-content: center;
+    align-content: center;
+}
+
+.cell {
+    position: relative;
+    width: var(--cell-size);
+    height: var(--cell-size);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 4px solid  var(--board-color);
+    cursor: pointer;
+}
+
+.cell:first-child,
+.cell:nth-child(2),
+.cell:nth-child(3) {
+    border-top: none;
+}
+
+.cell:nth-child(3),
+.cell:nth-child(6),
+.cell:nth-child(9) {
+    border-right: none;
+}
+
+.cell:first-child,
+.cell:nth-child(4),
+.cell:nth-child(7) {
+    border-left: none;
+}
+
+.cell:nth-child(7),
+.cell:nth-child(8),
+.cell:last-child {
+    border-bottom: none;
+}
+
+.cell.cross,
+.cell.nought {
+    cursor: not-allowed;
+}
+
+.cell.cross::before,
+.cell.cross::after,
+.game-board.cross .cell:not(.cross):not(.nought):hover::before,
+.game-board.cross .cell:not(.cross):not(.nought):hover::after {
+    content: "";
+    position: absolute;
+    /* 90% of cell size */
+    height: calc(var(--cell-size) * .9);
+    /* 15% of cell size */
+    width: calc(var(--cell-size) * .15);
+    background-color: var(--cross-color);
+}
+
+.cell.cross::before,
+.game-board.cross .cell:not(.cross):not(.nought):hover::before {
+    transform: rotate(45deg);
+}
+
+.cell.cross::after,
+.game-board.cross .cell:not(.cross):not(.nought):hover::after {
+    transform: rotate(-45deg);
+}
+
+.cell.nought::before,
+.cell.nought::after,
+.game-board.nought .cell:not(.cross):not(.nought):hover::before,
+.game-board.nought .cell:not(.cross):not(.nought):hover::after {
+    content: "";
+    position: absolute;
+    /* 90% of cell size */
+    height: calc(var(--cell-size) * .9);
+    width: calc(var(--cell-size) * .9);
+    border-radius:50%;
+    background-color: var(--nought-color);
+}
+
+.cell.nought::after,
+.game-board.nought .cell:not(.cross):not(.nought):hover::after {
+    height: calc(var(--cell-size) * .6);
+    width: calc(var(--cell-size) * .6);
+    background-color: var(--main-bg-color);
+}
+
+.game-board.nought .cell:hover:not(.cross):not(.nought):before,
+.game-board.cross .cell:not(.cross):not(.nought):hover::before,
+.game-board.cross .cell:not(.cross):not(.nought):hover::after {
+    background-color: var(--mark-hover-color); 
+}
+
+/* resuls message */
+
+.result-message {
+    width: 100%;
+    height: 75vh;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 30px;
+}
+
+.message {
+    font-size: 40px;
+}
+
+.result-message.cross-win {
+    color: var(--cross-color);
+}
+
+.result-message.nought-win {
+    color: var(--nought-color);
+}
+
+.restart-btn {
+    border: 4px solid var(--board-color);
+    border-radius: 10px;
+    color: var(--board-color);
+    padding: 10px 30px;
+    
+    background: none;
+
+    font: inherit;
+}
+
+/* score window */
+
+.score-window {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    display: none;
+    flex-direction: column;
+    align-items: center;
+
+    width: 450px;
+    min-height: 450px;
+    border: 4px solid var(--board-color);
+    border-radius: 40px;
+    margin: 0 auto;
+    padding: 20px 40px;
+
+    background-color: var(--main-bg-color);
+
+    color: var(--board-color);
+}
+
+.close-modal-btn {
+    cursor: pointer;
+}
+
+.close-modal-btn::before,
+.close-modal-btn::after {
+    content: "";
+    top: 5%;
+    left: 90%;
+    position: absolute;
+    height: 35px;
+    width: 10px;
+    background-color: var(--cross-color);
+}
+
+.close-modal-btn::before {
+    transform: rotate(45deg);
+}
+
+.close-modal-btn::after {
+    transform: rotate(-45deg);
+}
+
+.score {
+    border-collapse: collapse;
+}
+
+.score td,
+.score th {
+    width: var(--score-cell-size);
+    border-bottom: 2px solid var(--board-color);
+    text-align: center;
+}
